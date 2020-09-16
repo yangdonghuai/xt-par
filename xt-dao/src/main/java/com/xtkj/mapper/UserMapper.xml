@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xtkj.dao.UserMapper">
+    <resultMap id="userResultMap" type="com.xtkj.Role">
+        <id column="role_id" property="roleId"></id>
+        <result column="role_name" property="roleName"></result>
+    </resultMap>
+
+    <select id="userRoles" resultMap="userResultMap">
+        SELECT r.* from users u
+        left JOIN user_role ur on u.USER_ID = ur.USER_ID
+        left join role r on ur.ROLE_ID = r.ROLE_ID
+        where u.USER_ID = #{userId}
+    </select>
+
+</mapper>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xtkj.dao.RoleMapper">
+    <resultMap id="roleResultMap" type="com.xtkj.Permission">
+        <id column="permission_id" property="permissionId"></id>
+        <result column="permission_name" property="permissionName"></result>
+    </resultMap>
+
+    <select id="rolePermissions" resultMap="roleResultMap">
+        SELECT p.* from role r
+        left JOIN role_permission rp on r.role_id = rp.role_id
+        left join permission p on rp.permission_id = p.permission_id
+        where r.role_id = #{roleId}
+    </select>
+</mapper>
